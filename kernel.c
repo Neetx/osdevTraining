@@ -249,12 +249,14 @@ char* itoa(int i, char b[]){          //From integer to ascii, thanks to SENDRAY
 int strcmp(const char *str1, const char *str2){
   int res = 1;
   int i = 0;
-  while(str1[i] != 0x0A && str2[i] != 0x0A){
-    if(str1[i] != str2[i]){
-      res = 0;
+  if(strlen(str1) == strlen(str2)){
+    while(str1[i] != 0x0A && str2[i] != 0x0A){
+      if(str1[i] != str2[i]){
+        res = 0;
+      }
+      i++;
     }
-    i++;
-  }
+  }else{res = 0;}
   return res;
 }
 
@@ -274,7 +276,7 @@ char getchar(){
     while(1){
       if (kybrd_ctrl_read_status () & KYBRD_CTRL_STATS_MASK_OUT_BUF) {
         code = kybrd_enc_read_buf ();
-        if(code <= 0x58){
+        if(code <= 0x58){ //is in range??
           key = _kkybrd_scancode_std [code];
           break;
         }
@@ -289,13 +291,18 @@ uint8_t i=0;
   memset(string,0,len);
   while(i<len && temp != 0x0D){
     temp = getchar();
-    if(isascii(temp) && temp != 0x0D){
+    if(isascii(temp) && temp != 0x0D){ //0x0D is ENTER
+      if(temp == 0x08){   //backspace
+        terminal_column--;
+        terminal_putentryat(' ',terminal_color, terminal_column, terminal_row); //cancel last char
+        i--;
+      }else{
       terminal_putchar(temp);
       string[i] = temp;
-      i++;
+      i++;}
     }
   }
-  string[i] = 0x0A;
+  string[i] = 0x0A; //endline
 }
 //------------------------------------------------END BAD STUFF----------------------------------------------
 
@@ -343,16 +350,16 @@ int get_command(){
   int cmd = 1;
   char string[10];
   getline(string, 10);
-  if(strcmp(string,"help")==1){
+  if(strcmp(string,"help\x0D")==1){
     cmd = 1;
   }else{
-    if(strcmp(string,"shutdown")==1){
+    if(strcmp(string,"shutdown\x0D")==1){
       cmd = 2;
     }else{
-      if(strcmp(string,"echo")==1){
+      if(strcmp(string,"echo\x0D")==1){
         cmd = 3;
       }else{
-        if(strcmp(string,"clear")==1){
+        if(strcmp(string,"clear\x0D")==1){
           cmd = 4;
         }else{
           cmd = 5;
