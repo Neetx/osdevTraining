@@ -79,7 +79,7 @@ The results will be in $HOME/OsDev/opt/cross/bin folder.
 We have our cross-compiler!
 
 #### 3-Cloning repository
-Use my repo. PLEASE try to understand my code, I appreciate that you read and test the article, but I will be happy if you try to understand/improve my code or write your own 🙂 wiki.osdev.org will give you A LOT of help!
+Use my repo. Please think about my code, I appreciate that you read and test the article, but I will be happy if you try to understand/improve my code or write your own, wiki.osdev.org will give you A LOT of help!
 Clone my repo:
 ```
 cd $HOME/src/
