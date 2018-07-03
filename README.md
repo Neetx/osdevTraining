@@ -79,7 +79,7 @@ The results will be in $HOME/OsDev/opt/cross/bin folder.
 We have our cross-compiler!
 
 #### 3-Cloning repository
-Use my repo. Please think about my code, I appreciate that you read and test the article, but I will be happy if you try to understand/improve my code or write your own, wiki.osdev.org will give you A LOT of help!
+Please try to understand/improve my code or write your own, wiki.osdev.org will give you a lot of help.
 Clone my repo:
 ```
 cd $HOME/src/
@@ -106,12 +106,11 @@ i686-elf-as boot.s -o boot.o
 Now we have the setup to use higher level language: C (you can use some other).
 Normal C programming is in user space, also called Hosted Environment: you have a lot of useful library!!
 But we must use Freestanding environment so there isn’t standard libraries:
-We are alone with our code, our logic and our creativity. Keep it in mind!
+We are alone with our code, our logic and our creativity.
 Initial code has only simple, but good, vga text mode and an hello world.
 I implemented some nice and small things, for example input from keyboard, but I will explain it next.
 
-Now compile the kernel!
-
+Now compile the kernel:
 ```
 i686-elf-gcc -c kernel.c -o kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
 ```
@@ -140,7 +139,7 @@ cp myos.bin isodir/boot/myos.bin
 cp grub.cfg isodir/boot/grub/grub.cfg
 grub-mkrescue -o myos.iso isodir
 ```
-Now we have our myos.iso ! For testing: 
+Now we have our myos.iso. For testing: 
 ```
 qemu-system-i386 -cdrom myos.iso
 ```
@@ -151,8 +150,8 @@ You can use these commands:
 3- clear
 4- shutdown
 
-I explain my code by comments, there are the VERY GOOD comments by wiki.osdev.org that I left in the code.
-As you can see I wrote some basic functions because in freestanding environment there is nothing!
+I explain my code by comments, there are very goods comments by wiki.osdev.org that I left in the code.
+As you can see I wrote some basic functions because in freestanding environment there is nothing.
 
 Testing on real hardware:
 ```
