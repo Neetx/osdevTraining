@@ -151,7 +151,7 @@ You can use these commands:
 3- clear
 4- shutdown
 
-I explain my code by comments in code, there are the VERY GOOD comments by wiki.osdev.org that I left in the code (without this site I can’t do this, another THANKS)
+I explain my code by comments in code, there are the VERY GOOD comments by wiki.osdev.org that I left in the code (without this site I can’t do this, another thanks)
 As you can see I wrote some basic functions because in freestanding environment there is nothing!
 
 Testing on real hardware:
