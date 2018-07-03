@@ -9,7 +9,7 @@ Mini OS, developed just for training. A BIG thanks to wiki.osdev.org for initial
 
 This little OS isn't optimized, and it hasn't all basically features. I just played with this topic and shared it.
 
-####1-Requirements
+#### 1-Requirements
 I worked on Debian 9 with:
 ```
 gcc (Debian 6.3.0-18) 6.3.0 20170516
@@ -32,7 +32,7 @@ xorriso 1.4.6
 To check your program version use: program –version
 I installed them with apt packet manager.
 
-####2-Cross-Compiler
+#### 2-Cross-Compiler
 We need these programs to build our cross compiler for i686-elf because we must program on our host machine, but we need different binary. In my case I work from x86-64 arch so elf-64 is not good for i686 arch: i686-elf is the answer.
 Let’s setup our environment (folders creation + env setup):
 ```
@@ -78,7 +78,7 @@ make install gcc
 The results will be in $HOME/OsDev/opt/cross/bin folder.
 We have our cross-compiler!
 
-####3-Cloning repository
+#### 3-Cloning repository
 Use my repo. PLEASE try to understand my code, I appreciate that you read and test the article, but I will be happy if you try to understand/improve my code or write your own 🙂 wiki.osdev.org will give you A LOT of help!
 Clone my repo:
 ```
@@ -92,7 +92,7 @@ There are 3 important files:
 2- kernel.c
 3- linker.ld
 
-####4-Bootstrap
+#### 4-Bootstrap
 To boot into any OS we need bootloader (we will setup and use GRUB next).
 How bootloader starts the kernel? Thanks to a “Multiboot Standard” we only need to put some values in some global variables: multiboot header, the bootloader will search for them and then it will know how to boot our OS.
 We must write bootstrap in assembly code because there is no stack yet and asm can work without (we use asm to setup stack too).
@@ -102,7 +102,7 @@ boot.s is our bootstrap, let’s assemble it with our new binaries:
 i686-elf-as boot.s -o boot.o
 ```
 
-####5-Compile the kernel
+#### 5-Compile the kernel
 Now we have the setup to use higher level language: C (you can use some other).
 Normal C programming is in user space, also called Hosted Environment: you have a lot of useful library!!
 But we must use Freestanding environment so there isn’t standard libraries:
@@ -116,7 +116,7 @@ Now compile the kernel!
 i686-elf-gcc -c kernel.c -o kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
 ```
 
-####6-Linker
+#### 6-Linker
 We can now link the boot.o and kernel.o files to create our final kernel.
 There aren’t script for linking in kernel-development so we need our linker.ld.
 Let’s link:
@@ -161,7 +161,7 @@ sudo dd if=myos.iso of=/dev/sdx && sync
 
 ---
 
-###Screenshot
+### Screenshot
 
 ![alt text](grubos.png "Grub")
 ![alt text](proofos.png "Terminal")
